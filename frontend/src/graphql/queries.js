@@ -1,6 +1,5 @@
 // ================================
 // Import gql from Apollo Client
-
 import { gql } from '@apollo/client'
 // gql is used to write GraphQL queries in JS files
 
@@ -8,15 +7,11 @@ import { gql } from '@apollo/client'
 // GET LOGGED-IN USER QUERY
 
 export const GET_ME = gql`
-
-  // Query name: GetMe
-
+  # Query name: GetMe
   query GetMe {
-
-    // Call me resolver
+    # Call me resolver
     me {
-
-      // Fields we want from User type
+      # Fields we want from User type
       id
       name
       email
@@ -28,15 +23,11 @@ export const GET_ME = gql`
 // GET ALL CONTACTS QUERY
 
 export const GET_CONTACTS = gql`
-
-  // Query name: GetContacts
-
+  # Query name: GetContacts
   query GetContacts {
-
-    // Call getContacts resolver
+    # Call getContacts resolver
     getContacts {
-
-      // Fields returned for each contact
+      # Fields returned for each contact
       id
       name
       number
@@ -51,16 +42,12 @@ export const GET_CONTACTS = gql`
 // GET SINGLE CONTACT QUERY
 
 export const GET_CONTACT = gql`
-
-  // Query name: GetContact
-  // Variable: $id of type Int!
-
+  # Query name: GetContact
+  # Variable: $id of type Int!
   query GetContact($id: Int!) {
-
-    // Call getContact resolver
+    # Call getContact resolver
     getContact(id: $id) {
-
-      // Fields returned
+      # Fields returned
       id
       name
       number

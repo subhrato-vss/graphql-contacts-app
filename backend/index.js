@@ -1,6 +1,6 @@
 // ================================
 // Load environment variables from .env file
-// Example: PORT=4000, DB_HOST=localhost, DB_USER=root, etc.
+// Example: PORT=5000, DB_HOST=localhost, DB_USER=root, etc.
 // This allows us to use process.env.VARIABLE_NAME
 require('dotenv').config();
 
@@ -14,13 +14,13 @@ const morgan = require('morgan');
 // Morgan is a logging middleware
 // It logs every HTTP request in the console (method, URL, status, time)
 
-const { graphqlHTTP } = require('express-graphql');
+const {graphqlHTTP} = require('express-graphql');
 // express-graphql connects GraphQL with Express
 // graphqlHTTP creates a GraphQL middleware
 
 const cors = require('cors');
 // CORS allows frontend apps (React) from other domains/ports
-// Example: React on localhost:3000 can call backend on localhost:4000
+// Example: React on localhost:3000 can call backend on localhost:5000
 
 // ================================
 // Import project-specific files
@@ -35,7 +35,7 @@ const auth = require('./middleware/auth');
 // Custom authentication middleware
 // This will verify JWT and extract user info
 
-const { sequelize } = require('./models');
+const {sequelize} = require('./models');
 // Sequelize instance
 // Used to connect Node.js with MySQL database
 
@@ -112,7 +112,7 @@ app.use('/graphql', (req, res) => {
 app.get('/health', (req, res) => {
 
     // Simple REST endpoint to test server status
-    res.json({ status: 'Server is running!' });
+    res.json({status: 'Server is running!'});
 });
 
 // ================================
@@ -136,7 +136,7 @@ const startServer = async () => {
         // -------------------------------
         // Sync Sequelize models with DB
 
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({alter: true});
         // alter: true → updates DB tables based on model changes
 
         console.log('✅ Database models synchronized.');
