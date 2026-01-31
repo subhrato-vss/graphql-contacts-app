@@ -6,37 +6,54 @@ import { UPDATE_CONTACT_MUTATION } from '../../graphql/mutations'
 
 const EditContact = () => {
     const navigate = useNavigate()
+
+    // Get contact id from URL ( /contacts/edit/:id )
     const { id } = useParams()
+
+    // Local state to store form values
     const [formData, setFormData] = useState({
         name: '',
-        number: '', // ✅ Changed from 'phone' to 'number'
+        number: '',
         address: '',
     })
+
+    // State to store error messages
     const [error, setError] = useState('')
 
+    // useQuery to fetch a single contact by id
+    // This runs automatically when component loads
     const { loading: queryLoading, error: queryError, data } = useQuery(GET_CONTACT, {
-        variables: { id: parseInt(id) }, // ✅ Convert id to Int
+        variables: { id: parseInt(id) }, // GraphQL expects Int, params are strings
     })
 
+    // useMutation to update contact details
     const [updateContact, { loading: mutationLoading }] = useMutation(UPDATE_CONTACT_MUTATION, {
+
+        // Runs automatically after successful update
         onCompleted: () => {
+            // Redirect back to contacts list
             navigate('/contacts')
         },
+
+        // Runs automatically if backend or GraphQL error occurs
         onError: (error) => {
             setError(error.message)
         },
     })
 
+    // useEffect runs when query data arrives from backend
+    // It fills the form with existing contact values
     useEffect(() => {
         if (data?.getContact) {
             setFormData({
                 name: data.getContact.name,
-                number: data.getContact.number, // ✅ Changed from 'phone' to 'number'
+                number: data.getContact.number,
                 address: data.getContact.address,
             })
         }
     }, [data])
 
+    // Runs whenever user types in any form input
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -44,32 +61,38 @@ const EditContact = () => {
         })
     }
 
+    // Runs when user submits the update form
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
 
-        if (!formData.name || !formData.number || !formData.address) { // ✅ Changed phone to number
+        // Basic frontend validation
+        if (!formData.name || !formData.number || !formData.address) {
             setError('All fields are required')
             return
         }
 
         try {
+            // Call GraphQL updateContact mutation
             await updateContact({
                 variables: {
-                    id: parseInt(id), // ✅ Convert id to Int
-                    input: { // ✅ Wrapped in input object
+                    id: parseInt(id), // Convert URL param to Int
+                    input: {
                         name: formData.name,
-                        number: formData.number, // ✅ Changed from 'phone' to 'number'
+                        number: formData.number,
                         address: formData.address,
                     },
                 },
             })
         } catch (err) {
-            // Error handled by onError callback
+            // Error already handled in onError callback
         }
     }
 
+    // UI while single contact is loading
     if (queryLoading) return <div style={styles.loading}>Loading contact...</div>
+
+    // UI if fetching contact failed
     if (queryError) return <div style={styles.error}>Error: {queryError.message}</div>
 
     return (
@@ -77,8 +100,10 @@ const EditContact = () => {
             <div style={styles.formWrapper}>
                 <h2 style={styles.title}>Edit Contact</h2>
 
+                {/* Show error message if exists */}
                 {error && <div style={styles.errorBox}>{error}</div>}
 
+                {/* Edit contact form */}
                 <form onSubmit={handleSubmit} style={styles.form}>
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Name *</label>
@@ -96,8 +121,8 @@ const EditContact = () => {
                         <label style={styles.label}>Phone *</label>
                         <input
                             type="text"
-                            name="number" // ✅ Changed from 'phone' to 'number'
-                            value={formData.number} // ✅ Changed from phone to number
+                            name="number"
+                            value={formData.number}
                             onChange={handleChange}
                             style={styles.input}
                             placeholder="Enter phone number"
@@ -116,6 +141,7 @@ const EditContact = () => {
                         />
                     </div>
 
+                    {/* Action buttons */}
                     <div style={styles.buttonGroup}>
                         <button
                             type="submit"

@@ -1,16 +1,50 @@
-# React + Vite
+# 📇 Contact Management App (React + GraphQL)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **Contact Management Web Application** built using **React**, **Apollo Client**, and **GraphQL** with secure authentication and protected routes.
 
-Currently, two official plugins are available:
+This app allows users to **sign up, log in, and manage contacts** (add, edit, delete) using a clean and scalable GraphQL-based architecture.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React 18
+- React Router DOM
+- Apollo Client
+- GraphQL
+- JWT Authentication
+- CSS
 
-## Expanding the ESLint configuration
+### Backend (Expected)
+- Node.js
+- Express
+- GraphQL
+- Sequelize ORM
+- MySQL
+- JWT Authentication Middleware
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- User Signup & Login
+- JWT-based authentication
+- Token stored in `localStorage`
+- JWT token automatically attached to every GraphQL request
+- Protected routes using a custom `PrivateRoute`
+
+### 📞 Contact Management
+- View all contacts
+- Add a new contact
+- Edit existing contacts
+- Delete contacts
+- Fetch a single contact by ID
+
+### 🧠 GraphQL Advantages
+- Single `/graphql` endpoint
+- Typed queries and mutations
+- No over-fetching or under-fetching
+- Auto caching and smart re-rendering using Apollo Client
+

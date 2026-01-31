@@ -5,19 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df99b463-da43-4e3b-8783-4f6163dbeb3f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/graphql/resolvers.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/graphql/resolvers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/graphql/schema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/Contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/Contact.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Layout/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Layout/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Layout/PrivateRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Layout/PrivateRoute.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/graphql/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/graphql/mutations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/graphql/queries.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/graphql/queries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/Signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Contacts/AddContact.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Contacts/AddContact.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Contacts/ContactList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Contacts/ContactList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Contacts/EditContact.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Contacts/EditContact.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +35,8 @@
   &quot;keyToString&quot;: {
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -67,7 +65,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1769614823338</updated>
-      <workItem from="1769614830803" duration="2510000" />
+      <workItem from="1769614830803" duration="3412000" />
+      <workItem from="1769668428009" duration="12000" />
+      <workItem from="1769837456662" duration="274000" />
     </task>
     <servers />
   </component>

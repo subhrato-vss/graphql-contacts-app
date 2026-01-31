@@ -6,42 +6,68 @@ import { saveAuthData } from '../../utils/auth'
 
 const Login = () => {
     const navigate = useNavigate()
+
+    // Local state to store form input values
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     })
+
+    // State to store error message to show in UI
     const [error, setError] = useState('')
 
+    // useMutation hook to call LOGIN GraphQL mutation
+    // "login" is the function we call to execute the mutation
+    // "loading" becomes true while request is in progress
     const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+
+        // Runs automatically when login is successful
         onCompleted: (data) => {
+            // Save token and user info into localStorage
             saveAuthData(data.login.token, data.login.user)
+
+            // Redirect user to protected contacts page
             navigate('/contacts')
         },
+
+        // Runs automatically if GraphQL or server error occurs
         onError: (error) => {
-            // ✅ Extract the actual error message from GraphQL error
-            const errorMessage = error.graphQLErrors?.[0]?.message || error.message || 'An error occurred'
+            // Extract actual backend error message
+            const errorMessage =
+                error.graphQLErrors?.[0]?.message ||
+                error.message ||
+                'An error occurred'
+
+            // Store error message in state to show in UI
             setError(errorMessage)
-            console.error('Login error:', error) // Log full error for debugging
+
+            // Log full error in console for debugging
+            console.error('Login error:', error)
         },
     })
 
+    // Runs whenever user types in email or password field
     const handleChange = (e) => {
         setFormData({
             ...formData,
+            // Dynamically update field based on input name
             [e.target.name]: e.target.value,
         })
     }
 
+    // Runs when user submits the login form
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setError('') // ✅ Clear previous errors
+        e.preventDefault() // Prevent page reload
+        setError('')       // Clear previous errors
 
+        // Basic frontend validation
         if (!formData.email || !formData.password) {
             setError('All fields are required')
             return
         }
 
         try {
+            // Call GraphQL login mutation and send input data
             await login({
                 variables: {
                     input: {
@@ -51,7 +77,7 @@ const Login = () => {
                 },
             })
         } catch (err) {
-            // Error already handled by onError callback
+            // Error is already handled in onError callback
             console.error('Caught error:', err)
         }
     }
@@ -61,8 +87,10 @@ const Login = () => {
             <div style={styles.formWrapper}>
                 <h2 style={styles.title}>Login</h2>
 
+                {/* Show error message if exists */}
                 {error && <div style={styles.error}>{error}</div>}
 
+                {/* Login form */}
                 <form onSubmit={handleSubmit} style={styles.form}>
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Email</label>
@@ -88,6 +116,7 @@ const Login = () => {
                         />
                     </div>
 
+                    {/* Disable button while request is in progress */}
                     <button
                         type="submit"
                         disabled={loading}
@@ -97,8 +126,10 @@ const Login = () => {
                     </button>
                 </form>
 
+                {/* Signup redirect link */}
                 <p style={styles.linkText}>
-                    Don't have an account? <Link to="/signup" style={styles.link}>Sign Up</Link>
+                    Don't have an account?{' '}
+                    <Link to="/signup" style={styles.link}>Sign Up</Link>
                 </p>
             </div>
         </div>

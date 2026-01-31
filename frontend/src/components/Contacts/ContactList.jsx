@@ -5,100 +5,131 @@ import { DELETE_CONTACT_MUTATION } from '../../graphql/mutations'
 
 const ContactList = () => {
   const navigate = useNavigate()
+
+  // useQuery hook to fetch all contacts of logged-in user
+  // loading → true while API call is in progress
+  // error   → contains error object if request fails
+  // data    → contains GraphQL response data
+  // refetch → function to manually re-run this query
   const { loading, error, data, refetch } = useQuery(GET_CONTACTS)
 
+  // useMutation hook to delete a contact
   const [deleteContact] = useMutation(DELETE_CONTACT_MUTATION, {
+
+    // Runs automatically after successful deletion
     onCompleted: () => {
+      // Re-fetch contacts so UI updates instantly
       refetch()
     },
+
+    // Runs automatically if backend or GraphQL error occurs
     onError: (error) => {
       alert('Error deleting contact: ' + error.message)
     },
   })
 
+  // Runs when user clicks Delete button
   const handleDelete = async (id) => {
+
+    // Ask confirmation before deleting
     if (window.confirm('Are you sure you want to delete this contact?')) {
       try {
+        // Call GraphQL deleteContact mutation
         await deleteContact({
           variables: { id },
         })
       } catch (err) {
-        // Error handled by onError callback
+        // Error already handled in onError callback
       }
     }
   }
 
+  // Runs when user clicks Edit button
   const handleEdit = (id) => {
+    // Navigate to edit contact page
     navigate(`/contacts/edit/${id}`)
   }
 
+  // UI while contacts are being loaded
   if (loading) return <div style={styles.loading}>Loading contacts...</div>
+
+  // UI if error occurred
   if (error) return <div style={styles.error}>Error: {error.message}</div>
 
+  // Extract contacts safely from GraphQL response
   const contacts = data?.getContacts || []
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <h2 style={styles.title}>My Contacts</h2>
-        <button 
-          onClick={() => navigate('/contacts/add')} 
-          style={styles.addButton}
-        >
-          + Add Contact
-        </button>
-      </div>
+      <div style={styles.container}>
+        <div style={styles.header}>
+          <h2 style={styles.title}>My Contacts</h2>
 
-      {contacts.length === 0 ? (
-        <div style={styles.emptyState}>
-          <p>No contacts yet. Add your first contact!</p>
+          {/* Navigate to Add Contact page */}
+          <button
+              onClick={() => navigate('/contacts/add')}
+              style={styles.addButton}
+          >
+            + Add Contact
+          </button>
         </div>
-      ) : (
-        <div style={styles.grid}>
-          {contacts.map((contact) => (
-            <div key={contact.id} style={styles.card}>
-              <div style={styles.cardHeader}>
-                <h3 style={styles.contactName}>{contact.name}</h3>
-              </div>
-              
-              <div style={styles.cardBody}>
-                <div style={styles.contactInfo}>
-                  <span style={styles.label}>Phone:</span>
-                  <span style={styles.value}>{contact.number}</span>
-                </div>
-                
-                <div style={styles.contactInfo}>
-                  <span style={styles.label}>Address:</span>
-                  <span style={styles.value}>{contact.address}</span>
-                </div>
-                
-                <div style={styles.contactInfo}>
-                  <span style={styles.label}>Added:</span>
-                  <span style={styles.value}>
+
+        {/* Empty state */}
+        {contacts.length === 0 ? (
+            <div style={styles.emptyState}>
+              <p>No contacts yet. Add your first contact!</p>
+            </div>
+        ) : (
+
+            /* Contacts grid */
+            <div style={styles.grid}>
+              {contacts.map((contact) => (
+                  <div key={contact.id} style={styles.card}>
+
+                    {/* Contact name */}
+                    <div style={styles.cardHeader}>
+                      <h3 style={styles.contactName}>{contact.name}</h3>
+                    </div>
+
+                    {/* Contact details */}
+                    <div style={styles.cardBody}>
+                      <div style={styles.contactInfo}>
+                        <span style={styles.label}>Phone:</span>
+                        <span style={styles.value}>{contact.number}</span>
+                      </div>
+
+                      <div style={styles.contactInfo}>
+                        <span style={styles.label}>Address:</span>
+                        <span style={styles.value}>{contact.address}</span>
+                      </div>
+
+                      <div style={styles.contactInfo}>
+                        <span style={styles.label}>Added:</span>
+                        <span style={styles.value}>
                     {new Date(parseInt(contact.createdAt)).toLocaleDateString()}
                   </span>
-                </div>
-              </div>
+                      </div>
+                    </div>
 
-              <div style={styles.cardFooter}>
-                <button 
-                  onClick={() => handleEdit(contact.id)} 
-                  style={styles.editButton}
-                >
-                  Edit
-                </button>
-                <button 
-                  onClick={() => handleDelete(contact.id)} 
-                  style={styles.deleteButton}
-                >
-                  Delete
-                </button>
-              </div>
+                    {/* Action buttons */}
+                    <div style={styles.cardFooter}>
+                      <button
+                          onClick={() => handleEdit(contact.id)}
+                          style={styles.editButton}
+                      >
+                        Edit
+                      </button>
+                      <button
+                          onClick={() => handleDelete(contact.id)}
+                          style={styles.deleteButton}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
-    </div>
+        )}
+      </div>
   )
 }
 
